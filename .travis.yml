@@ -13,7 +13,7 @@ script:
 
 after_success:
   - docker build -t uryadovalex/multi-client ./client
-  - docker build -t uryadovalex/multi-ngnix ./ngnix
+  - docker build -t uryadovalex/multi-nginx ./nginx
   - docker build -t uryadovalex/multi-server ./server
   - docker build -t uryadovalex/multi-worker ./worker
 

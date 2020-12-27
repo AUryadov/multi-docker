@@ -12,9 +12,14 @@ script:
   - docker run -e CI=true uryadovalex/react-test npm run test
 
 after_success:
+  - docker build -t uryadovalex/multi-client ./client
   - docker build -t uryadovalex/multi-nginx ./nginx
- 
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker build -t uryadovalex/multi-server ./server
+  - docker build -t uryadovalex/multi-worker ./worker
 
-  - docker push uryadovalex/multi-ngnix
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   
+  - docker push uryadovalex/multi-client
+  - docker push uryadovalex/multi-nginx
+  - docker push uryadovalex/multi-server
+  - docker push uryadovalex/multi-worker
